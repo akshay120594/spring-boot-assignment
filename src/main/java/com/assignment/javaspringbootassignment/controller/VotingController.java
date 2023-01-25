@@ -21,28 +21,28 @@ public class VotingController {
     VotingService service;
 
     @PostMapping(value ="/entercandidate")
-    public ResponseEntity<String> enterCandidate(@RequestParam String name){
+    public synchronized ResponseEntity<String> enterCandidate(@RequestParam String name){
         String result=service.enterCandidate(name);
         return new ResponseEntity<String>("candidate added:"+result, HttpStatus.CREATED);
 
     }
     @PostMapping(value = "/castvote")
-    public ResponseEntity<Boolean>castVote(@RequestParam String name){
+    public synchronized ResponseEntity<Boolean>castVote(@RequestParam String name){
         boolean result=service.castVote(name);
         return new ResponseEntity<Boolean>(result,HttpStatus.OK);
     }
     @GetMapping(value = "/countvote")
-    public ResponseEntity<Integer> countVote(@RequestParam String name) {
+    public synchronized ResponseEntity<Integer> countVote(@RequestParam String name) {
         return ResponseEntity.ok(service.countVote(name));
     }
 
     @GetMapping(value = "/listvote")
-    public ResponseEntity<List<Candidate>> listVote() {
+    public synchronized ResponseEntity<List<Candidate>> listVote() {
         return ResponseEntity.ok(service.listVote());
     }
 
     @GetMapping(value = "/getwinner")
-    public ResponseEntity<String> getWinner() {
+    public synchronized ResponseEntity<String> getWinner() {
         return ResponseEntity.ok(service.getWinner());
     }
 }

@@ -5,7 +5,7 @@ import com.assignment.javaspringbootassignment.entity.Candidate;
 import java.util.List;
 
 public interface VotingService {
-    public boolean enterCandidate(String name);
+    public String enterCandidate(String name);
     public boolean castVote(String name);
     public int countVote(String name);
     public List<Candidate> listVote();

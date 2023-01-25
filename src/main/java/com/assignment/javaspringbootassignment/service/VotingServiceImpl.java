@@ -3,12 +3,15 @@ package com.assignment.javaspringbootassignment.service;
 import com.assignment.javaspringbootassignment.entity.Candidate;
 import com.assignment.javaspringbootassignment.exceptionHandler.CandidateNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class VotingServiceImpl implements VotingService{
 
     @Autowired
@@ -16,9 +19,12 @@ public class VotingServiceImpl implements VotingService{
 
     Map<String,Integer> map = new HashMap<String,Integer>();
     @Override
-    public boolean enterCandidate(String name) {
-        map.put(name,0);
-        return true;
+    public String enterCandidate(String name) {
+        if (!name.isEmpty())
+            map.put(name,0);
+        else
+            throw new CandidateNotFoundException("invalid input");
+        return name;
     }
 
     @Override

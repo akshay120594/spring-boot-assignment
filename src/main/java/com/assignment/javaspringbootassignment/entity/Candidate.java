@@ -1,5 +1,8 @@
 package com.assignment.javaspringbootassignment.entity;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Candidate {
     private String name;
     private int count;
